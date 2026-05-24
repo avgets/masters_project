@@ -1,0 +1,15 @@
+# Streamlit UI
+streamlit>=1.35.0
+
+# Docling — распознавание таблиц
+docling
+
+# OCR backend
+easyocr
+
+# PDF → изображения (требует poppler, см. README)
+pdf2image
+
+# Excel
+pandas
+openpyxl

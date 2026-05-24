@@ -1,0 +1,29 @@
+{
+  "seed": 42,
+  "device": "cpu",
+  "batch_size": 16,
+  "num_epochs": 20,
+  "lr": 0.003,
+  "weight_decay": 0.0001,
+  "max_grad_norm": 5.0,
+  "max_text_len": 256,
+  "num_bins": 64,
+  "num_slots": 5,
+  "class_ids": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "vocab_size": 140,
+  "num_numeric_features": 78,
+  "char_emb_dim": 64,
+  "char_hidden_dim": 64,
+  "step_hidden_dim": 128,
+  "table_hidden_dim": 128,
+  "dropout": 0.2,
+  "split_xls_path": "C:\\Users\\GaV\\Desktop\\FinRepDatasetFileList.xlsx",
+  "row_codes_path": "resources/row_codes.txt",
+  "best_model_path": "artifacts\\table_cls\\best_model.pt"
+}

@@ -1,0 +1,45 @@
+# --- Python байткод и кэш ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Виртуальные окружения ---
+venv/
+.env/
+.venv/
+
+# --- Логи и отладка ---
+*.log
+
+# --- Результаты тестов ---
+.cache/
+.coverage
+_debug
+_BiLSTM
+htmlcov/
+
+# --- Сборка пакетов ---
+build/
+dist/
+*.egg-info/
+
+# --- IDE и редакторы ---
+.vscode/
+.idea/
+
+# --- Веса моделей / большие бинарники ---
+# Папки, где обычно лежат веса
+models/
+checkpoints/
+weights/
+#artifacts/
+
+# Типичные расширения весов
+#*.pt
+#*.pth
+*.ckpt
+*.bin
+*.h5
+*.onnx
+*.tflite
+*.safetensors
