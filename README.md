@@ -11,4 +11,6 @@ Repository for HSE masters diploma
 7) Код серверног приложения streamlit
 8) Ссылки на собранный датасет:  
    8.1) Полный датасет изображений страниц документов регулярной финансовой отчетности эмитентов (model evaluation):https://drive.google.com/drive/folders/1HtduuuAqOhfV-yYdlpP_yn3Rgv9ZlUOh  
-   8.2) Fine-tuning датасет для YOLA (train/val/test): https://drive.google.com/drive/folders/1T5ZliDYQ4chzjjdvhWAU15EFVrsj5xGQ
+   8.2) Fine-tuning датасет для YOLA (train/val/test): https://drive.google.com/drive/folders/10MbXZqhMTkkF3gQXcK_cnZ0wu_c4rjL8
+   
+   
