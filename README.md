@@ -1,5 +1,5 @@
 # Development of a Machine Learning-Based Intelligent System for Recognition of Financial Statements from Scanned Documents
-Repository for HSE masters diploma
+Репозиторий по магистерской дипломной работе
 
 Проект включает в себя следующие оснвоные блоки:
 1) Парсеры сайтов e-disclosure.ru и bo.nalog.ru
