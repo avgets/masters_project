@@ -14,9 +14,7 @@ venv/
 # --- Результаты тестов ---
 .cache/
 .coverage
-_debug
-_BiLSTM
-table_cls_inference
+_pipeline
 htmlcov/
 
 # --- Сборка пакетов ---
@@ -27,6 +25,8 @@ dist/
 # --- IDE и редакторы ---
 .vscode/
 .idea/
+
+_*
 
 # --- Веса моделей / большие бинарники ---
 # Папки, где обычно лежат веса
@@ -44,3 +44,6 @@ weights/
 *.onnx
 *.tflite
 *.safetensors
+
+bilstm_for_tables
+models

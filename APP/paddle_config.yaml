@@ -1,0 +1,66 @@
+pipeline_name: table_recognition_v2
+
+use_layout_detection: false
+use_doc_preprocessor: true
+use_general_ocr: true
+
+SubPipelines:
+  DocPreprocessor:
+    pipeline_name: doc_preprocessor
+    use_doc_orientation_classify: true
+    use_doc_unwarping: false
+    SubModules:
+      DocOrientationClassify:
+        model_name: PP-LCNet_x1_0_doc_ori
+        model_dir: ./models/PP-LCNet_x1_0_doc_ori
+        module_name: doc_text_orientation
+
+  GeneralOCR:
+    pipeline_name: OCR
+    text_type: general
+    use_doc_preprocessor: false
+    use_textline_orientation: false
+    SubModules:
+      TextDetection:
+        model_name: PP-OCRv5_mobile_det
+        model_dir: ./models/PP-OCRv5_mobile_det
+        module_name: text_detection
+        box_thresh: 0.6
+        thresh: 0.3
+        unclip_ratio: 1.5
+        limit_side_len: 64
+        limit_type: min
+        max_side_limit: 4000
+
+      TextRecognition:
+        model_name: cyrillic_PP-OCRv5_mobile_rec
+        model_dir: ./models/cyrillic_PP-OCRv5_mobile_rec
+        module_name: text_recognition
+        batch_size: 6
+        score_thresh: 0.0
+
+SubModules:
+  TableClassification:
+    model_name: PP-LCNet_x1_0_table_cls
+    model_dir: ./models/PP-LCNet_x1_0_table_cls
+    module_name: table_classification
+
+  WiredTableStructureRecognition:
+    model_name: SLANeXt_wired
+    model_dir: ./models/SLANeXt_wired
+    module_name: table_structure_recognition
+
+  WirelessTableStructureRecognition:
+    model_name: SLANet_plus
+    model_dir: ./models/SLANet_plus
+    module_name: table_structure_recognition
+
+  WiredTableCellsDetection:
+    model_name: RT-DETR-L_wired_table_cell_det
+    model_dir: ./models/RT-DETR-L_wired_table_cell_det
+    module_name: table_cells_detection
+
+  WirelessTableCellsDetection:
+    model_name: RT-DETR-L_wireless_table_cell_det
+    model_dir: ./models/RT-DETR-L_wireless_table_cell_det
+    module_name: table_cells_detection

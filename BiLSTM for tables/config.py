@@ -1,4 +1,5 @@
 from __future__ import annotations
+from pathlib import Path
 
 CLASS_IDS = [0, 1, 2, 3, 4]
 OTHER_TABLE_CLASS_ID = 4
@@ -34,6 +35,7 @@ SLOT_FEATURES = [
     "looks_like_date",
 ]
 
-ROW_CODES_PATH: str = "resources/row_codes.txt"
+#PROJECT_ROOT = Path(__file__).resolve().parent
+ROW_CODES_PATH = "bilstm_for_tables/resources/row_codes.txt"
 SPLIT_XLS_PATH: str = r"C:\Users\GaV\Desktop\FinRepDatasetFileList.xlsx"
 
