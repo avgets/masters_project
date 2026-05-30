@@ -1,0 +1,4 @@
+streamlit==1.57.0
+requests==2.32.3
+prometheus-client==0.21.1
+

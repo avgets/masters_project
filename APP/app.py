@@ -2,12 +2,14 @@ import streamlit as st
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from threading import BoundedSemaphore
+from uuid import uuid4
 import os
 os.environ["PADDLE_PDX_CACHE_HOME"] = "./models"
+os.environ["PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK"] = "True"
 
 @st.cache_resource
 def get_processing_semaphore():
-    return BoundedSemaphore(3)
+    return BoundedSemaphore(2)
 
 PAGE_PREVIEW_WIDTH = 400
 
@@ -86,15 +88,15 @@ if uploaded is not None:
     sem = get_processing_semaphore()
     acquired = False
 
-    #try:
+    try:
 
-    acquired = sem.acquire(blocking=False)
-    if not acquired:
-            st.error("Сервер сейчас обрабатывает 3 PDF одновременно. Попробуйте через минуту.")
+        acquired = sem.acquire(blocking=False)
+        if not acquired:
+            st.error("Сервер сейчас обрабатывает 2 PDF одновременно. Попробуйте через минуту.")
             st.stop()
 
 
-    with log_col:
+        with log_col:
             with st.spinner("Идёт обработка...", show_time=False):
 
                 log = make_logger(log_box)
@@ -104,10 +106,14 @@ if uploaded is not None:
 
          
                 with TemporaryDirectory() as tmp_dir:
-    
+
                     tmp_dir = Path(tmp_dir)
-                    input_pdf = tmp_dir / uploaded.name
-                    output_name = f"{Path(uploaded.name).stem}_tables.xlsx"
+
+                    pdf_uid = uuid4().hex
+                    input_pdf = tmp_dir / f"{pdf_uid}.pdf"
+
+                    safe_stem = str(Path(uploaded.name).stem)[:100]
+                    output_name = f"{safe_stem}_tables.xlsx"
                     output_xlsx = tmp_dir / output_name
 
                     pdf_bytes = uploaded.read()
@@ -135,15 +141,15 @@ if uploaded is not None:
                         "excel_bytes": excel_bytes,
                         }
                         )
-    st.session_state.uploader_key += 1
-    st.rerun()
+        st.session_state.uploader_key += 1
+        st.rerun()
 
-    #except Exception as e:
-    #    image_box.empty()
-    #    with log_box.container():
-    #        st.markdown("### Статус обработки")
-    #        st.error(f"Ошибка: {e}")
+    except Exception as e:
+        image_box.empty()
+        with log_box.container():
+            st.markdown("### Статус обработки")
+            st.error(f"Ошибка: {e}")
 
-    #finally:
-    if acquired:
+    finally:
+        if acquired:
             sem.release()
